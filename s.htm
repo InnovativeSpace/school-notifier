@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<title>Announce</title>
+<h1>Send an announcement to the school</h1>
+<input id="announcement" name="announcement" value="Apologies for the interruption, " >
+<select id="recipient">
+  <option value="all">All</option>
+  <!-- Add more options here -->
+</select>
+<button onclick="submit()">Send</button>
+
+<script>
+function submit(){
+  var js_anouncment = document.getElementById("announcement").value;
+  var recipient = document.getElementById("recipient").value;
+
+  console.log(js_anouncment);
+  const js_anouncment_i = {
+    content: js_anouncment,
+    recipient: recipient
+  };
+  fetch('http://localhost:5000/b.htm', {
+    method: 'POST',
+    body: JSON.stringify(js_anouncment_i),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8'
+    }
+  })
+  .then(response => response.json())
+  .then(json => {
+    console.log(json);
+  });
+};
+</script>
